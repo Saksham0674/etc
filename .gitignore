@@ -1,0 +1,17 @@
+# OS files
+.DS_Store
+**/.DS_Store
+
+# Obsidian & AI
+.obsidian/
+.claude/
+.antigravity/
+
+# Testing/Isolating configurations with '_' prefix
+_*
+_*/
+
+# Editor / Tool Swap and Temp Files
+*.swp
+*.swo
+*~

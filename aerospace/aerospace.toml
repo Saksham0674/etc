@@ -1,0 +1,288 @@
+# aerospace.toml
+# F1-F12 switch workspaces (w1-chat), Alt-0-9 switch workspaces (s0-s9)
+
+# ── macOS gotchas ────────────────────────────────────────────────────────────
+# F11 triggers Show Desktop instead of switching workspace:
+#   System Settings → Keyboard → Keyboard Shortcuts → Mission Control → untick "Show Desktop"
+# cmd-F5 toggles VoiceOver instead of moving a window to w5:
+#   System Settings → Keyboard → Keyboard Shortcuts → Accessibility → untick "Turn VoiceOver on or off"
+
+config-version = 2
+
+# start-at-login = true
+automatically-unhide-macos-hidden-apps = true
+enable-normalization-flatten-containers = true
+enable-normalization-opposite-orientation-for-nested-containers = true
+accordion-padding = 25
+default-root-container-layout = 'tiles'
+default-root-container-orientation = 'auto'
+on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
+
+# Force AeroSpace to start on w1, then run JankyBorders if uncommented
+after-startup-command = [
+    'workspace w1',
+    # 'exec-and-forget borders active_color=0xffe1e3e4 inactive_color=0x66494d64 width=2.5 style=round'
+]
+
+# Re-read this file whenever it is saved
+auto-reload-config = true
+
+[gaps]
+inner.horizontal = 0
+inner.vertical = 0
+outer.left = 0
+outer.bottom = 0
+outer.top = 0
+outer.right = 0
+
+[mode.main.binding]
+# Layout and recovery
+ctrl-cmd-a = 'layout accordion horizontal vertical'
+ctrl-cmd-s = 'layout tiles horizontal vertical'
+ctrl-cmd-semicolon = 'mode service'
+
+# Workspace navigation: F1-F12 keys (w1-chat)
+f1 = 'workspace w1'
+f2 = 'workspace w2'
+f3 = 'workspace w3'
+f4 = 'workspace w4'
+f5 = 'workspace w5'
+f6 = 'workspace w6'
+f7 = 'workspace w7'
+f8 = 'workspace w8'
+f9 = 'workspace files'
+f10 = 'workspace todo'
+f11 = 'workspace music'
+f12 = 'workspace chat'
+
+# Workspace navigation: Alt-0-9 keys (s0-s9)
+alt-0 = 'workspace s0'
+alt-1 = 'workspace s1'
+alt-2 = 'workspace s2'
+alt-3 = 'workspace s3'
+alt-4 = 'workspace s4'
+alt-5 = 'workspace s5'
+alt-6 = 'workspace s6'
+alt-7 = 'workspace s7'
+alt-8 = 'workspace s8'
+alt-9 = 'workspace s9'
+
+# Send window to workspace (focus stays behind) - F1-F12
+ctrl-f1 = 'move-node-to-workspace w1'
+ctrl-f2 = 'move-node-to-workspace w2'
+ctrl-f3 = 'move-node-to-workspace w3'
+ctrl-f4 = 'move-node-to-workspace w4'
+ctrl-f5 = 'move-node-to-workspace w5'
+ctrl-f6 = 'move-node-to-workspace w6'
+ctrl-f7 = 'move-node-to-workspace w7'
+ctrl-f8 = 'move-node-to-workspace w8'
+ctrl-f9 = 'move-node-to-workspace files'
+ctrl-f10 = 'move-node-to-workspace todo'
+ctrl-f11 = 'move-node-to-workspace music'
+ctrl-f12 = 'move-node-to-workspace chat'
+
+# Send window to workspace (focus stays behind) - Alt-0-9
+ctrl-alt-0 = 'move-node-to-workspace s0'
+ctrl-alt-1 = 'move-node-to-workspace s1'
+ctrl-alt-2 = 'move-node-to-workspace s2'
+ctrl-alt-3 = 'move-node-to-workspace s3'
+ctrl-alt-4 = 'move-node-to-workspace s4'
+ctrl-alt-5 = 'move-node-to-workspace s5'
+ctrl-alt-6 = 'move-node-to-workspace s6'
+ctrl-alt-7 = 'move-node-to-workspace s7'
+ctrl-alt-8 = 'move-node-to-workspace s8'
+ctrl-alt-9 = 'move-node-to-workspace s9'
+
+# Move window to workspace and follow focus - F1-F12
+cmd-f1 = 'move-node-to-workspace --focus-follows-window w1'
+cmd-f2 = 'move-node-to-workspace --focus-follows-window w2'
+cmd-f3 = 'move-node-to-workspace --focus-follows-window w3'
+cmd-f4 = 'move-node-to-workspace --focus-follows-window w4'
+cmd-f5 = 'move-node-to-workspace --focus-follows-window w5'
+cmd-f6 = 'move-node-to-workspace --focus-follows-window w6'
+cmd-f7 = 'move-node-to-workspace --focus-follows-window w7'
+cmd-f8 = 'move-node-to-workspace --focus-follows-window w8'
+cmd-f9 = 'move-node-to-workspace --focus-follows-window files'
+cmd-f10 = 'move-node-to-workspace --focus-follows-window todo'
+cmd-f11 = 'move-node-to-workspace --focus-follows-window music'
+cmd-f12 = 'move-node-to-workspace --focus-follows-window chat'
+
+# Move window to workspace and follow focus - Alt-0-9
+cmd-alt-0 = 'move-node-to-workspace --focus-follows-window s0'
+cmd-alt-1 = 'move-node-to-workspace --focus-follows-window s1'
+cmd-alt-2 = 'move-node-to-workspace --focus-follows-window s2'
+cmd-alt-3 = 'move-node-to-workspace --focus-follows-window s3'
+cmd-alt-4 = 'move-node-to-workspace --focus-follows-window s4'
+cmd-alt-5 = 'move-node-to-workspace --focus-follows-window s5'
+cmd-alt-6 = 'move-node-to-workspace --focus-follows-window s6'
+cmd-alt-7 = 'move-node-to-workspace --focus-follows-window s7'
+cmd-alt-8 = 'move-node-to-workspace --focus-follows-window s8'
+cmd-alt-9 = 'move-node-to-workspace --focus-follows-window s9'
+
+# Summon workspace (pull to active monitor and focus) - F1-F12
+shift-f1 = 'summon-workspace w1'
+shift-f2 = 'summon-workspace w2'
+shift-f3 = 'summon-workspace w3'
+shift-f4 = 'summon-workspace w4'
+shift-f5 = 'summon-workspace w5'
+shift-f6 = 'summon-workspace w6'
+shift-f7 = 'summon-workspace w7'
+shift-f8 = 'summon-workspace w8'
+shift-f9 = 'summon-workspace files'
+shift-f10 = 'summon-workspace todo'
+shift-f11 = 'summon-workspace music'
+shift-f12 = 'summon-workspace chat'
+
+# Summon workspace (pull to active monitor and focus) - Alt-0-9
+shift-alt-0 = 'summon-workspace s0'
+shift-alt-1 = 'summon-workspace s1'
+shift-alt-2 = 'summon-workspace s2'
+shift-alt-3 = 'summon-workspace s3'
+shift-alt-4 = 'summon-workspace s4'
+shift-alt-5 = 'summon-workspace s5'
+shift-alt-6 = 'summon-workspace s6'
+shift-alt-7 = 'summon-workspace s7'
+shift-alt-8 = 'summon-workspace s8'
+shift-alt-9 = 'summon-workspace s9'
+
+# Vim-like Focus navigation: ctrl-cmd-h/j/k/l
+ctrl-cmd-h = 'focus left'
+ctrl-cmd-j = 'focus down'
+ctrl-cmd-k = 'focus up'
+ctrl-cmd-l = 'focus right'
+
+# Vim-like Window moves: ctrl-alt-h/j/k/l
+ctrl-alt-h = 'move left'
+ctrl-alt-j = 'move down'
+ctrl-alt-k = 'move up'
+ctrl-alt-l = 'move right'
+
+# Resizing (smart picks split axis)
+ctrl-cmd-minus = 'resize smart -50'
+ctrl-cmd-equal = 'resize smart +50'
+
+# Zoom fullscreen toggle
+ctrl-cmd-enter = 'fullscreen'
+
+[mode.service.binding]
+esc = ['reload-config', 'mode main']
+r = ['flatten-workspace-tree', 'mode main'] # reset the workspace tree
+f = ['layout floating tiling', 'mode main'] # float / re-tile window
+b = ['balance-sizes', 'mode main'] # equalize all window sizes on the workspace
+h = ['join-with left', 'mode main'] # join with neighbor into one container
+j = ['join-with down', 'mode main']
+k = ['join-with up', 'mode main']
+l = ['join-with right', 'mode main']
+
+# ── Window rules: first matching rule wins ──────────────────────────────────
+
+# Picture-in-Picture windows (any browser) must never tile (modern regex syntax)
+[[on-window-detected]]
+if = 'test %{window-title} ~= "(?i)picture[- ]in[- ]picture"'
+run = 'layout floating'
+
+# Core App Auto-Routing (modern v2 syntax)
+[[on-window-detected]]
+if = 'test %{app-bundle-id} = "com.apple.finder"'
+run = 'move-node-to-workspace files'
+
+[[on-window-detected]]
+if = 'test %{app-bundle-id} = "com.omnigroup.OmniFocus4"'
+run = 'move-node-to-workspace todo'
+
+[[on-window-detected]]
+if = 'test %{app-bundle-id} = "com.spotify.client"'
+run = 'move-node-to-workspace music'
+
+[[on-window-detected]]
+if = 'test %{app-bundle-id} = "com.apple.Music"'
+run = 'move-node-to-workspace music'
+
+[[on-window-detected]]
+if = 'test %{app-bundle-id} = "com.apple.MobileSMS"'
+run = 'move-node-to-workspace chat'
+
+[[on-window-detected]]
+if = 'test %{app-bundle-id} = "net.whatsapp.WhatsApp"'
+run = 'move-node-to-workspace chat'
+
+[[on-window-detected]]
+if = 'test %{app-bundle-id} = "com.hnc.Discord"'
+run = 'move-node-to-workspace chat'
+
+# Floating rules: System utility and dialog windows that break tiling grids (modern v2 syntax)
+[[on-window-detected]]
+if = 'test %{app-bundle-id} = "com.apple.systempreferences"'
+run = 'layout floating'
+
+[[on-window-detected]]
+if = 'test %{app-bundle-id} = "com.apple.calculator"'
+run = 'layout floating'
+
+[[on-window-detected]]
+if = 'test %{app-bundle-id} = "com.apple.archiveutility"'
+run = 'layout floating'
+
+[[on-window-detected]]
+if = 'test %{app-bundle-id} = "com.apple.FaceTime"'
+run = 'layout floating'
+
+[[on-window-detected]]
+if = 'test %{app-bundle-id} = "com.apple.mobilephone"'
+run = 'layout floating'
+
+[[on-window-detected]]
+if = 'test %{app-bundle-id} = "com.bitwarden.desktop"'
+run = 'layout floating'
+
+[[on-window-detected]]
+if = 'test %{app-bundle-id} = "us.zoom.xos"'
+run = 'layout floating'
+
+[[on-window-detected]]
+if = 'test %{app-bundle-id} = "com.colliderli.iina"'
+run = 'layout floating'
+
+[[on-window-detected]]
+if = 'test %{app-bundle-id} = "com.logi.optionsplus"'
+run = 'layout floating'
+
+[[on-window-detected]]
+if = 'test %{app-bundle-id} = "com.apple.AppStore"'
+run = 'layout floating'
+
+[[on-window-detected]]
+if = 'test %{app-bundle-id} = "com.apple.DiskUtility"'
+run = 'layout floating'
+
+[[on-window-detected]]
+if = 'test %{app-bundle-id} = "com.apple.ActivityMonitor"'
+run = 'layout floating'
+
+[[on-window-detected]]
+if = 'test %{app-bundle-id} = "com.apple.QuickTimePlayerX"'
+run = 'layout floating'
+
+[[on-window-detected]]
+if = 'test %{app-bundle-id} = "com.apple.keychainaccess"'
+run = 'layout floating'
+
+[[on-window-detected]]
+if = 'test %{app-bundle-id} = "com.chabomakers.Antinote"'
+run = 'layout floating'
+
+[[on-window-detected]]
+if = 'test %{app-bundle-id} = "com.finetuneapp.FineTune"'
+run = 'layout floating'
+
+[[on-window-detected]]
+if = 'test %{app-bundle-id} = "ltd.anybox.FolderPreview"'
+run = 'layout floating'
+
+[[on-window-detected]]
+if = 'test %{app-bundle-id} = "com.Ebullioscopic.Atoll"'
+run = 'layout floating'
+
+[[on-window-detected]]
+if = 'test %{app-bundle-id} = "com.wontaeyang.HRM"'
+run = 'layout floating'
