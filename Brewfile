@@ -2,6 +2,8 @@ tap "darrylmorley/whatcable"
 tap "felixkratz/formulae", "https://github.com/FelixKratz/homebrew-formulae"
 tap "nikitabobko/tap"
 tap "wontaeyang/hrm"
+# battery manager
+brew "batt"
 # Clone of cat(1) with syntax highlighting and Git integration
 brew "bat"
 # Resource monitor. C++ version and continuation of bashtop and bpytop
