@@ -27,21 +27,28 @@ bindkey '^[[B' history-beginning-search-forward
 alias ff='fastfetch'
 alias restart='exec $SHELL'
 
-# git
-alias glog='git --no-pager log --graph --oneline -10'
-
-# tmux
-alias tt='tmux'
-alias ttn='tmux new'
-alias tta='tmux a'
-alias ttls='tmux ls'
+# brew
+alias brewup='brew update && brew upgrade && brew upgrade --cask && brew doctor && brew autoremove && brew cleanup --prune=all && brew outdated && brew missing;'
 
 # eza (ls/tree replacement)
 _EZA='eza --icons=always --color=always --group-directories-first --hyperlink'
 alias ls="$_EZA"
 alias lla="$_EZA -la --git --header"
 alias llas="$_EZA -la --git --header --total-size"
+alias tree="$_EZA --tree -a --level=3"
 alias trees="$_EZA --tree -a"
+
+# git
+alias gst='git status'
+alias gb='git switch'
+alias gbc='git switch -c'
+alias glog="git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset)%C(auto)%d%C(reset) %C(bold yellow)(%ar)%C(reset)%n  %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%n' --all -10"
+alias glogg="git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset)%C(auto)%d%C(reset) %C(bold yellow)(%ar)%C(reset)%n  %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%n' --all"
+
+# tmux
+alias tt='tmux'
+alias ttn='tmux new'
+alias tta='tmux a'
 
 # neovim
 alias nv="nvim"
@@ -59,13 +66,6 @@ unset _EZA
 # =============================================================================
 # mkdir + cd in one step
 mkcd() { mkdir -p "$1" && cd "$1" }
-
-# touch with auto-created parent dirs
-touchp() {
-  for f in "$@"; do
-    mkdir -p "$(dirname "$f")" && touch "$f"
-  done
-}
 
 # =============================================================================
 # 5. TOOL INTEGRATIONS (Lazy Loads & Caches)
@@ -122,3 +122,4 @@ bindkey '^f' autosuggest-accept # ctrl+f to accept suggestion
 
 # Zsh Syntax Highlighting (MUST BE ABSOLUTELY LAST)
 source $HOME/repos/opt/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
