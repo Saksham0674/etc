@@ -14,6 +14,7 @@ export PATH="$CARGO_HOME/bin:$PATH"
 
 # Node.js (npm)
 export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npm/npmrc"
+export npm_config_cache="$XDG_CACHE_HOME/npm"
 
 # Conda
 export CONDARC="$XDG_CONFIG_HOME/conda/condarc"
