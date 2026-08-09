@@ -6,6 +6,7 @@ export XDG_STATE_HOME="$HOME/.local/state"
 
 # Zsh
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
+export SHELL_SESSIONS_DISABLE=1
 
 # Rust / Cargo
 export CARGO_HOME="$XDG_DATA_HOME/cargo"
