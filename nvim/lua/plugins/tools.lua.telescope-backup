@@ -84,57 +84,6 @@ return {
     lazy = false,
     config = function()
       require("snacks").setup({
-        picker = {
-          ui_select = true,
-          icons = { 
-            prompt = "> ",
-            ui = {
-              selected = "●",
-              unselected = " ",
-            },
-          },
-
-          on_show = function(picker)
-            picker.layout:maximize()
-          end,
-          layout = {
-            layout = {
-              backdrop = 100,
-              width = 0.99,
-              height = 0.99,
-              border = "none",
-              box = "horizontal",
-              {
-                box = "vertical",
-                { win = "input", height = 1, border = { " ", " ", " ", " ", " ", " ", " ", " " }, title = " Find Files ", title_pos = "left" },
-                { win = "list", border = { " ", " ", " ", " ", " ", " ", " ", " " }, title = " Results ", title_pos = "left" },
-              },
-              { win = "preview", border = { " ", " ", " ", " ", " ", " ", " ", " " }, title = " Grep Preview ", title_pos = "left", width = 0.6 },
-            },
-          },
-          win = {
-            input = {
-              keys = {
-                ["<Esc>"] = false,
-                ["<C-c>"] = false,
-                ["<a-.>"] = { "toggle_hidden", mode = { "i", "n" } },
-              }
-            },
-            list = {
-              wo = {
-                signcolumn = "yes",
-                statuscolumn = "%#SnacksPickerSelected#%{v:lnum == line('.') ? '>' : ' '}%*",
-              }
-            }
-          },
-          formatters = { 
-            file = { filename_first = false },
-            selected = {
-              show_always = true,
-              unselected = true,
-            },
-          },
-        },
         scroll = { enabled = true },
         indent = {
           enabled = true,
@@ -145,10 +94,8 @@ return {
       })
 
       local map = vim.keymap.set
-      map("n", "<leader>f", function() Snacks.picker.files({ hidden = true, ignored = true }) end, { desc = "Find Files" })
-      map("n", "<leader>g", function() Snacks.picker.grep({ hidden = true, ignored = true }) end, { desc = "Live Grep" })
-      map("n", "<leader>sg", function() Snacks.picker.files({ hidden = true, ignored = true }) end, { desc = "Find All Files (incl. hidden/ignored)" })
-      map("n", "<leader>bs", function() Snacks.picker.buffers() end, { desc = "Find Buffers (Snacks)" })
+
+      
       map("n", "<leader>b", function()
         local qf_list = {}
         for _, buf in ipairs(vim.api.nvim_list_bufs()) do
@@ -188,20 +135,59 @@ return {
       })
       
       map("n", "<leader>bu", "<cmd>only<cr>", { desc = "Un-split Window (Keeps buffers alive)" })
-      map("n", "<leader>si", function() Snacks.picker.grep_word() end, { desc = "Grep Word under cursor" })
-      map("n", "<leader>so", function() Snacks.picker.recent() end, { desc = "Recent / Old Files" })
-      map("n", "<leader>sh", function() Snacks.picker.help() end, { desc = "Help Tags" })
-      map("n", "<leader>sm", function() Snacks.picker.man() end, { desc = "Man Pages" })
-      map("n", "<leader>sr", function() Snacks.picker.lsp_references() end, { desc = "LSP References" })
-      map("n", "<leader>sd", function() Snacks.picker.diagnostics() end, { desc = "LSP Diagnostics" })
-      map("n", "<leader>ss", function() Snacks.picker.lines() end, { desc = "Fuzzy Find Lines in Buffer" })
-      map("n", "<leader>sS", function() Snacks.picker.lsp_symbols() end, { desc = "Document Symbols" })
-      map("n", "<leader>sw", function() Snacks.picker.lsp_workspace_symbols() end, { desc = "Workspace Symbols" })
-      map("n", "<leader>sk", function() Snacks.picker.keymaps() end, { desc = "Keymaps Search" })
+      -- Telescope keymaps mapped below
+    end
+  },
+
+  {
+    "nvim-telescope/telescope.nvim",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    config = function()
+      require("telescope").setup({
+        defaults = {
+          mappings = {
+            i = {
+              ["<Esc>"] = false,
+              ["<C-c>"] = false,
+            },
+          },
+          -- This is the trick: empty borders still draw the title text floating in the air
+          borderchars = { "", "", "", "", "", "", "", "" },
+          prompt_prefix = "> ",
+          selection_caret = "> ",
+          sorting_strategy = "ascending",
+          layout_config = {
+            width = 0.99,
+            height = 0.99,
+            prompt_position = "top",
+            preview_cutoff = 40,
+          },
+          path_displays = { "smart" },
+          color_devicons = true,
+        }
+      })
+
+      local builtin = require("telescope.builtin")
+      local map = vim.keymap.set
+      
+      -- Launch and Test: Press <leader>f to see the massive floating prompt!
+      map("n", "<leader>f", builtin.find_files, { desc = "Find Files" })
+      map("n", "<leader>g", builtin.live_grep, { desc = "Live Grep" })
+      map("n", "<leader>bs", builtin.buffers, { desc = "Find Buffers" })
+      map("n", "<leader>si", builtin.grep_string, { desc = "Grep Word under cursor" })
+      map("n", "<leader>so", builtin.oldfiles, { desc = "Recent / Old Files" })
+      map("n", "<leader>sh", builtin.help_tags, { desc = "Help Tags" })
+      map("n", "<leader>sm", builtin.man_pages, { desc = "Man Pages" })
+      map("n", "<leader>sr", builtin.lsp_references, { desc = "LSP References" })
+      map("n", "<leader>sd", builtin.diagnostics, { desc = "LSP Diagnostics" })
+      map("n", "<leader>ss", builtin.current_buffer_fuzzy_find, { desc = "Fuzzy Find Lines in Buffer" })
+      map("n", "<leader>sS", builtin.lsp_document_symbols, { desc = "Document Symbols" })
+      map("n", "<leader>sw", builtin.lsp_workspace_symbols, { desc = "Workspace Symbols" })
+      map("n", "<leader>sk", builtin.keymaps, { desc = "Keymaps Search" })
+      map("n", "<leader>sq", builtin.quickfix, { desc = "Quickfix List Picker" })
+      map("n", "<leader>P", builtin.commands, { desc = "Command Palette" })
+      map("n", "<leader>R", builtin.registers, { desc = "Registers Search" })
       map("n", "<leader>st", function() _G.open_theme_picker() end, { desc = "Colorschemes Picker (Live Preview)" })
-      map("n", "<leader>sq", function() Snacks.picker.qflist() end, { desc = "Quickfix List Picker" })
-      map("n", "<leader>P", function() Snacks.picker.commands() end, { desc = "Command Palette" })
-      map("n", "<leader>R", function() Snacks.picker.registers() end, { desc = "Registers Search" })
     end
   },
 
