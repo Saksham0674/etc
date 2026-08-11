@@ -93,6 +93,7 @@ cask "brave-browser"
 cask "discord"
 # Per-application volume mixer, equalizer, and audio router
 cask "finetune"
+cask "font-geist-mono-nerd-font"
 cask "font-jetbrains-mono-nerd-font"
 # Download accelerator and organiser
 cask "free-download-manager"
