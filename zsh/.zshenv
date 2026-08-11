@@ -32,7 +32,7 @@ export VISUAL=nvim
 
 # Custom binaries
 typeset -U path PATH
-export PATH="$HOME/.local/bin:$HOME/hub/bin:$PATH"
+export PATH="$HOME/.local/bin:$HOME/repos/utils/bin:$PATH"
 
 # Added by Antigravity IDE
 export PATH="/Users/saksham/.antigravity-ide/antigravity-ide/bin:$PATH"
