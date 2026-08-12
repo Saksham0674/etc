@@ -31,7 +31,7 @@ alias restart='exec $SHELL'
 alias brewup='brew update && brew upgrade && brew upgrade --cask && brew doctor && brew autoremove && brew cleanup --prune=all && brew outdated && brew missing;'
 
 # eza (ls/tree replacement)
-_EZA='eza --icons=always --color=always --group-directories-first --hyperlink'
+_EZA='_eza_smart'   # check section 4 custom function
 alias ls="$_EZA"
 alias lla="$_EZA -la --git --header"
 alias llas="$_EZA -la --git --header --total-size"
@@ -64,9 +64,29 @@ unset _EZA
 # =============================================================================
 # 4. CUSTOM FUNCTIONS
 # =============================================================================
+# Smart wrapper for eza to resolve home directories
+_eza_smart() {
+  local new_args=()
+  for arg in "$@"; do
+    if [[ "$arg" != -* && ! -e "$arg" && -e "$HOME/$arg" ]]; then
+      new_args+=("$HOME/$arg")
+    else
+      new_args+=("$arg")
+    fi
+  done
+  eza --icons=always --color=always --group-directories-first --hyperlink=auto "${new_args[@]}"
+}
+
 # mkdir + cd in one step
 mkcd() { mkdir -p "$1" && cd "$1" }
 
+# Execute a command in a specific directory and automatically return
+in() {
+  local target_dir="$1"
+  shift
+  # Use eval so aliases (like lla) expand correctly
+  (cd "$target_dir" && eval "$*")
+}
 # =============================================================================
 # 5. TOOL INTEGRATIONS (Lazy Loads & Caches)
 # =============================================================================
