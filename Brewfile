@@ -64,6 +64,8 @@ brew "starship"
 brew "stockfish"
 # Organize software neatly under a single directory tree (e.g. /usr/local)
 brew "stow"
+brew "timewarrior"
+brew "tinymist"
 # Official tldr client written in Rust
 brew "tlrc"
 # Terminal multiplexer
@@ -95,6 +97,7 @@ cask "brave-browser"
 cask "discord"
 # Per-application volume mixer, equalizer, and audio router
 cask "finetune"
+cask "font-geist-mono-nerd-font"
 cask "font-jetbrains-mono-nerd-font"
 # Download accelerator and organiser
 cask "free-download-manager"
@@ -122,6 +125,7 @@ cask "obsidian"
 # Scheduling application focusing on organisation
 cask "omnifocus"
 # Music streaming service
+cask "sioyek"
 cask "spotify"
 # Open-source code editor
 cask "visual-studio-code"

@@ -6,6 +6,7 @@ export XDG_STATE_HOME="$HOME/.local/state"
 
 # Zsh
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
+export SHELL_SESSIONS_DISABLE=1
 
 # Rust / Cargo
 export CARGO_HOME="$XDG_DATA_HOME/cargo"
@@ -32,7 +33,8 @@ export VISUAL=nvim
 
 # Custom binaries
 typeset -U path PATH
-export PATH="$HOME/.local/bin:$HOME/hub/bin:$PATH"
+export UTILS_PREFIX="$HOME/repos/utils"
+export PATH="$HOME/.local/bin:$UTILS_PREFIX/bin:$PATH"
 
 # Added by Antigravity IDE
 export PATH="/Users/saksham/.antigravity-ide/antigravity-ide/bin:$PATH"

@@ -2,7 +2,6 @@
 # 1. ZSH OPTIONS & HISTORY
 # =============================================================================
 export HISTFILE="$HOME/.local/state/zsh/history"
-export SHELL_SESSION_DIR="$HOME/.local/state/zsh/sessions"
 HISTSIZE=5000
 SAVEHIST=5000
 
