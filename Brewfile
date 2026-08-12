@@ -62,6 +62,8 @@ brew "starship"
 brew "stockfish"
 # Organize software neatly under a single directory tree (e.g. /usr/local)
 brew "stow"
+brew "timewarrior"
+brew "tinymist"
 # Official tldr client written in Rust
 brew "tlrc"
 # Terminal multiplexer
@@ -121,6 +123,7 @@ cask "obsidian"
 # Scheduling application focusing on organisation
 cask "omnifocus"
 # Music streaming service
+cask "sioyek"
 cask "spotify"
 # Open-source code editor
 cask "visual-studio-code"
