@@ -255,7 +255,14 @@ return {
   {
     "folke/todo-comments.nvim",
     config = function()
-      require("todo-comments").setup()
+      require("todo-comments").setup({
+        keywords = {
+          BOT = {
+            icon = "🤖",
+            color = "#00FFD1",
+          },
+        }
+      })
     end
   },
 
