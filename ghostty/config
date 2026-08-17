@@ -27,15 +27,21 @@ palette = 14=#83c092
 palette = 15=#d3c6aa
 
 font-size = 15
-# font-family = JetBrainsMono Nerd Font 
+# font-family = JetBrainsMono Nerd Font
 font-family = GeistMono Nerd Font
 
- font-style = Italic
-font-style-bold = Bold Italic
-
-# Enable ligatues -> only needed for GeistMono Nerd Font
-font-feature = calt
+# Geist Mono Font config ->
+# remove the 'slash' from 0
+font-feature = ss09
+# Enable ligatues
 font-feature = ss11
+
+# font-style = Italic
+# font-style-bold = Bold Italic
+# font-style-italic = regular
+
+# deliberate: brighter + heavier text. max strength
+# font-thicken = true
 
 window-padding-x = 5
 window-padding-y = 5
