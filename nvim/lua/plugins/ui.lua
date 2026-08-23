@@ -248,6 +248,7 @@ return {
           { "<leader>b", group = "buffers" },
           { "<leader>f", group = "files/find" },
           { "<leader>s", group = "search/symbols" },
+          { "<leader>S", group = "sessions" },
           { "<leader>g", group = "grep/git" },
           { "<leader>h", group = "hunks" },
           { "<leader>x", group = "trouble/diagnostics" },

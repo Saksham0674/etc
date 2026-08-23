@@ -8,6 +8,7 @@ vim.g.maplocalleader = " "
 require("core.options")     -- Basic vim settings (tabs, numbers, clipboard)
 require("core.autocmds")    -- Automatic behaviors (highlight on yank, auto-resize)
 require("core.keymaps")     -- Global keybindings (window navigation, saving)
+require("core.sessions")    -- Named session snapshots (save/load/browse layouts)
 
 -- lazy.nvim bootstrap
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
