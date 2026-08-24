@@ -195,43 +195,26 @@ end
 local QF_TITLE = "Sessions"
 
 function M.qf()
+  -- Uses default qflist infrastructure (setqflist + copen) but text-only.
+  -- No filename/bufnr so qf shows just "name · N buffers · time" with no
+  -- file column and no jump target - s/v/.cc have nothing to open.
   local sessions = M.list()
   local items = {}
   for _, s in ipairs(sessions) do
     table.insert(items, {
-      filename = s.path,
       text = string.format("%s · %d buffers · %s", s.name, bufcount(s.path), reltime(s.mtime)),
     })
   end
   vim.fn.setqflist({}, " ", { title = QF_TITLE, items = items })
   vim.cmd("copen")
 
-  -- Buffer-local maps override the generic FileType=qf maps in tools.lua.
-  -- Only active while THIS quickfix is open.
   local bufnr = vim.api.nvim_get_current_buf()
 
-  local function current_session()
-    local idx = vim.fn.line(".")
-    local qf = vim.fn.getqflist()
-    local item = qf[idx]
-    if not item then return nil end
-    -- getqflist returns bufnr, not filename string; map back via original list
-    -- Use text to extract name or index into sessions
-    if item.bufnr and item.bufnr ~= 0 then
-      local fname = vim.api.nvim_buf_get_name(item.bufnr)
-      if fname and fname ~= "" then return { filename = fname, bufnr = item.bufnr } end
-    end
-    -- Fallback: use quickfix text or index; sessions[idx] is reliable as qf order matches list
-    local s = sessions[idx]
-    if s then return { filename = s.path, bufnr = 0 } end
-    return nil
-  end
-
   local function load_under_cursor()
-    local item = current_session()
-    if not item or not item.filename or item.filename == "" then return end
+    local s = sessions[vim.fn.line(".")]
+    if not s then return end
     vim.cmd("cclose")
-    M.load_path(item.filename)
+    M.load_path(s.path)
   end
 
   local opts = { buffer = bufnr, silent = true, nowait = true }
@@ -240,12 +223,11 @@ function M.qf()
   vim.keymap.set("n", "l", load_under_cursor,
     vim.tbl_extend("force", opts, { desc = "Load session" }))
   vim.keymap.set("n", "d", function()
-    local item = current_session()
-    if not item or not item.filename or item.filename == "" then return end
-    local name = vim.fn.fnamemodify(item.filename, ":t:r")
-    local answer = vim.fn.confirm("Delete session '" .. name .. "'?", "&Yes\n&No", 2)
+    local s = sessions[vim.fn.line(".")]
+    if not s then return end
+    local answer = vim.fn.confirm("Delete session '" .. s.name .. "'?", "&Yes\n&No", 2)
     if answer ~= 1 then return end
-    local ok, err = os.remove(item.filename)
+    local ok, err = os.remove(s.path)
     if not ok then
       vim.notify("Delete failed: " .. tostring(err), vim.log.levels.ERROR)
       return
@@ -253,10 +235,9 @@ function M.qf()
     -- Refresh the list in place; keeps the qf window open
     sessions = M.list()
     local refreshed = {}
-    for _, s in ipairs(sessions) do
+    for _, s2 in ipairs(sessions) do
       table.insert(refreshed, {
-        filename = s.path,
-        text = string.format("%s · %d buffers · %s", s.name, bufcount(s.path), reltime(s.mtime)),
+        text = string.format("%s · %d buffers · %s", s2.name, bufcount(s2.path), reltime(s2.mtime)),
       })
     end
     vim.fn.setqflist({}, " ", { title = QF_TITLE, items = refreshed })

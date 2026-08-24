@@ -165,6 +165,10 @@ return {
       vim.api.nvim_create_autocmd("FileType", {
         pattern = "qf",
         callback = function(args)
+          -- Sessions uses default qflist (setqflist/copen) but is NOT a file list.
+          -- Skip buffer-style maps (l/<CR>/s/v) for it; sessions.lua:197 sets title="Sessions".
+          local qf_title = vim.fn.getqflist({ title = 1 }).title
+          if qf_title == "Sessions" then return end
           local opts = { buffer = args.buf, silent = true }
           vim.keymap.set("n", "<C-c>", "<cmd>cclose<cr>", opts)
           vim.keymap.set("n", "l", "<cr><cmd>cclose<cr>", opts)

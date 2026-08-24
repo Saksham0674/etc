@@ -31,11 +31,15 @@ vim.api.nvim_create_autocmd("TextYankPost", {
   end,
 })
 
--- Quickfix List Live Auto-Preview on Cursor Move
+-- Quickfix List Live Auto-Preview on Cursor Move (buffers only)
 vim.api.nvim_create_autocmd("FileType", {
   group = group,
   pattern = "qf",
   callback = function(args)
+    -- Sessions qflist (title="Sessions" in sessions.lua:195) has text-only items
+    -- with no file to preview - skip .cc preview for it.
+    local qf_title = vim.fn.getqflist({ title = 1 }).title
+    if qf_title == "Sessions" then return end
     vim.api.nvim_create_autocmd("CursorMoved", {
       buffer = args.buf,
       callback = function()
