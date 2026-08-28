@@ -79,6 +79,7 @@ return {
           rust = { "rustfmt" },
           c = { "clang-format" },
           cpp = { "clang-format" },
+          zig = { "zigfmt" },
         },
       })
 
@@ -115,7 +116,7 @@ return {
       local default_langs = {
         "lua", "vim", "vimdoc", "query", "markdown", "markdown_inline",
         "typst", "rust", "typescript", "javascript", "tsx", "c", "cpp",
-        "go", "bash", "yaml", "toml", "json", "python"
+        "go", "bash", "yaml", "toml", "json", "python", "zig"
       }
       
       require("nvim-treesitter").setup({
@@ -209,7 +210,7 @@ return {
       vim.lsp.config("pyright", { settings = { python = { analysis = { autoSearchPaths = true, useLibraryCodeForTypes = true, diagnosticMode = "workspace" } } } })
       vim.lsp.enable("pyright")
 
-      local simple_servers = { "ruff", "rust_analyzer", "clangd", "ts_ls", "gopls", "bashls", "yamlls", "taplo", "jsonls" }
+      local simple_servers = { "ruff", "rust_analyzer", "clangd", "ts_ls", "gopls", "bashls", "yamlls", "taplo", "jsonls", "zls" }
       for _, s in ipairs(simple_servers) do
         vim.lsp.config(s, {})
         vim.lsp.enable(s)
