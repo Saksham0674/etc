@@ -71,10 +71,10 @@ local function nav(dir, at_edge, window, pane)
 end
 
 local map = vim.keymap.set
-map("n", "<C-h>", nav("h", "pane_at_left", "-1", "L"), { desc = "Navigate left (nvim/tmux)" })
-map("n", "<C-j>", nav("j", "pane_at_bottom", "+1", "D"), { desc = "Navigate down (nvim/tmux)" })
-map("n", "<C-k>", nav("k", "pane_at_top", "-1", "U"), { desc = "Navigate up (nvim/tmux)" })
-map("n", "<C-l>", nav("l", "pane_at_right", "+1", "R"), { desc = "Navigate right (nvim/tmux)" })
+map({ "n", "t" }, "<C-h>", nav("h", "pane_at_left", "-1", "L"), { desc = "Navigate left (nvim/tmux)" })
+map({ "n", "t" }, "<C-j>", nav("j", "pane_at_bottom", "+1", "D"), { desc = "Navigate down (nvim/tmux)" })
+map({ "n", "t" }, "<C-k>", nav("k", "pane_at_top", "-1", "U"), { desc = "Navigate up (nvim/tmux)" })
+map({ "n", "t" }, "<C-l>", nav("l", "pane_at_right", "+1", "R"), { desc = "Navigate right (nvim/tmux)" })
 
 
 return {

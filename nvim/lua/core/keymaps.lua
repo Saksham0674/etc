@@ -7,8 +7,9 @@ local opts = { noremap = true, silent = true }
 map("n", "<leader>0", "<cmd>nohlsearch<cr>", { desc = "Clear search highlight" })
 map("n", "<Esc>", "<cmd>nohlsearch<cr>", { desc = "Clear search highlight" })
 
--- Exit insert mode quickly
+-- Exit insert & terminal modes quickly
 map("i", "jk", "<Esc>", { desc = "Exit insert mode" })
+map("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 
 -- Files & Buffers Management
 map("n", "<leader>w", "<cmd>update<cr>", { desc = "Write buffer if modified" })
