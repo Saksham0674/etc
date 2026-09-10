@@ -178,6 +178,16 @@ return {
       })
     end
   },
+  {
+    "WhoIsSethDaniel/mason-tool-installer.nvim",
+    dependencies = { "williamboman/mason.nvim" },
+    config = function()
+      require("mason-tool-installer").setup({
+        ensure_installed = { "stylua", "prettier" },
+        run_on_start = true,
+      })
+    end
+  },
 
   {
     "neovim/nvim-lspconfig",
@@ -210,7 +220,10 @@ return {
       vim.lsp.config("pyright", { settings = { python = { analysis = { autoSearchPaths = true, useLibraryCodeForTypes = true, diagnosticMode = "workspace" } } } })
       vim.lsp.enable("pyright")
 
-      local simple_servers = { "ruff", "rust_analyzer", "clangd", "ts_ls", "gopls", "bashls", "yamlls", "taplo", "jsonls", "zls" }
+      vim.lsp.config("clangd", { cmd = { "clangd", "--clang-tidy", "--background-index" } })
+      vim.lsp.enable("clangd")
+
+      local simple_servers = { "ruff", "rust_analyzer", "ts_ls", "gopls", "bashls", "yamlls", "taplo", "jsonls", "zls" }
       for _, s in ipairs(simple_servers) do
         vim.lsp.config(s, {})
         vim.lsp.enable(s)
